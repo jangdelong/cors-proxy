@@ -8,14 +8,14 @@ export const runtime = 'edge';
 const app = new Hono().basePath('/api');
 
 app.use(
-  '/*',
+  '*',
   cors({
     origin: (origin) => {
       return origin.endsWith('jelon.xyz')
         ? origin
         : 'https://jelon.xyz';
     },
-    allowHeaders: ['*', 'X-Custom-Header', 'Upgrade-Insecure-Requests'],
+    allowHeaders: ['X-Custom-Header', 'Upgrade-Insecure-Requests'],
     allowMethods: ['POST', 'GET', 'OPTIONS'],
     exposeHeaders: ['Content-Length', 'X-Kuma-Revision'],
     maxAge: 600,
