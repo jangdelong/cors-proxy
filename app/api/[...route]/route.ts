@@ -47,15 +47,15 @@ app.post('/api/get-github-access-token', async (c) => {
     });
 
     // 4. 处理目标 API 响应
-    // if (!response.ok) {
-    //   const error = await response.text();
-    //   // throw new HTTPException(response.status as any, { message: error });
-    //   return c.json({
-    //     success: false,
-    //     status: response.status,
-    //     message: error,
-    //   });
-    // }
+    if (!response.ok) {
+      const error = await response.text();
+      // throw new HTTPException(response.status as any, { message: error });
+      return c.json({
+        success: false,
+        status: response.status,
+        message: error,
+      });
+    }
 
     const result = await response.json();
 
@@ -69,13 +69,13 @@ app.post('/api/get-github-access-token', async (c) => {
     console.error('Forwarding error:', error);
     if (error instanceof HTTPException) {
       return c.json({
-        success: true,
+        success: false,
         status: error.status,
         message: error.message
       }, error.status);
     }
     return c.json({
-      success: true,
+      success: false,
       status: 500,
       message: 'Internal server error'
     }, 500);
