@@ -5,7 +5,7 @@ import { HTTPException } from 'hono/http-exception';
 
 export const runtime = 'edge';
 
-const app = new Hono();
+const app = new Hono().basePath('/api');
 
 app.use(
   '*',
@@ -16,8 +16,6 @@ app.use(
     exposeHeaders: ['*'],  // 暴露所有响应头
   })
 );
-
-app.basePath('/api');
 
 app.get('/hello', (c) => {
   return c.json({
