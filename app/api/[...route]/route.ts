@@ -69,13 +69,13 @@ app.post('/api/get-github-access-token', async (c) => {
     console.error('Forwarding error:', error);
     if (error instanceof HTTPException) {
       return c.json({
-        success: false,
+        success: true,
         status: error.status,
         message: error.message
       }, error.status);
     }
     return c.json({
-      success: false,
+      success: true,
       status: 500,
       message: 'Internal server error'
     }, 500);
