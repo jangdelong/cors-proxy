@@ -49,7 +49,12 @@ app.post('/api/get-github-access-token', async (c) => {
     // 4. 处理目标 API 响应
     if (!response.ok) {
       const error = await response.text();
-      throw new HTTPException(response.status as any, { message: error });
+      // throw new HTTPException(response.status as any, { message: error });
+      c.json({
+        success: false,
+        status: response.status,
+        message: error,
+      });
     }
 
     const result = await response.json();
