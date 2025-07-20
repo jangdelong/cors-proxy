@@ -50,7 +50,7 @@ app.post('/api/get-github-access-token', async (c) => {
     if (!response.ok) {
       const error = await response.text();
       // throw new HTTPException(response.status as any, { message: error });
-      c.json({
+      return c.json({
         success: false,
         status: response.status,
         message: error,
