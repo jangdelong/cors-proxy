@@ -23,6 +23,12 @@ app.get('/hello', (c) => {
   })
 });
 
+app.post('/test-post', (c) => {
+  return c.json({
+    message: 'Hello test post!!!!!',
+  });
+});
+
 app.post('/get-github-access-token', async (c) => {
    try {
     // 1. 获取原始请求数据
