@@ -5,9 +5,10 @@ import { HTTPException } from 'hono/http-exception';
 
 export const runtime = 'edge';
 
-const app = new Hono().basePath('/api');
+const app = new Hono();
 
 app.use(
+  '/api/*',
   cors({
     origin: '*',            // 允许所有来源
     allowMethods: ['*'],   // 允许所有 HTTP 方法
@@ -16,13 +17,13 @@ app.use(
   })
 );
 
-app.get('/hello', (c) => {
+app.get('/api/hello', (c) => {
   return c.json({
     message: 'Hello from Hono!',
   })
 });
 
-app.post('/get-github-access-token1', (c) => {
+app.post('/api/get-github-access-token1', (c) => {
   return c.json({
     message: 'Hello test post!!!!!',
   });
