@@ -29,7 +29,7 @@ app.post('/api/get-github-access-token1', (c) => {
   });
 });
 
-app.post('/get-github-access-token', async (c) => {
+app.post('/api/get-github-access-token', async (c) => {
    try {
     // 1. 获取原始请求数据
     const originalBody = await c.req.json();
@@ -43,7 +43,7 @@ app.post('/get-github-access-token', async (c) => {
       headers: {
         ...c.req.header,
       },
-      body: originalBody,
+      body: JSON.stringify(originalBody),
     });
 
     // 4. 处理目标 API 响应
@@ -81,3 +81,5 @@ app.post('/get-github-access-token', async (c) => {
 export const GET = handle(app);
 
 export const POST = handle(app);
+
+export default handle(app);
