@@ -23,13 +23,13 @@ app.get('/hello', (c) => {
   })
 });
 
-app.post('/test-post', (c) => {
+app.post('/get-github-access-token', (c) => {
   return c.json({
     message: 'Hello test post!!!!!',
   });
 });
 
-app.post('/get-github-access-token', async (c) => {
+app.post('/get-github-access-token1', async (c) => {
    try {
     // 1. 获取原始请求数据
     const originalBody = await c.req.json();
