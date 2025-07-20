@@ -8,7 +8,7 @@ export const runtime = 'edge';
 const app = new Hono().basePath('/api');
 
 app.use(
-  '/api/*',
+  '/*',
   cors({
     origin: (origin) => {
       return origin.endsWith('jelon.xyz')
