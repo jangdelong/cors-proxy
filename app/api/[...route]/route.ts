@@ -43,7 +43,7 @@ app.post('/get-github-access-token', async (c) => {
       headers: {
         ...c.req.header,
       },
-      body: JSON.stringify(originalBody),
+      body: originalBody,
     });
 
     // 4. 处理目标 API 响应
