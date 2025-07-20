@@ -37,9 +37,6 @@ app.post('/get-github-access-token', async (c) => {
     const response = await fetch(targetUrl, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
-        // 可添加认证头等 (根据目标 API 要求)
-        // 'Authorization': `Bearer ${TOKEN}`
         ...c.req.header,
       },
       body: JSON.stringify(originalBody),
