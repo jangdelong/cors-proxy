@@ -1,5 +1,5 @@
 import { Hono } from 'hono'
-// import { cors } from 'hono/cors'
+import { cors } from 'hono/cors'
 import { handle } from 'hono/vercel'
 import { HTTPException } from 'hono/http-exception';
 
@@ -7,15 +7,14 @@ export const runtime = 'edge';
 
 const app = new Hono().basePath('/api');
 
-// app.use(
-//   '*',
-//   cors({
-//     origin: '*',            // 允许所有来源
-//     allowMethods: ['*'],   // 允许所有 HTTP 方法
-//     allowHeaders: ['*'],    // 允许所有请求头
-//     exposeHeaders: ['*'],  // 暴露所有响应头
-//   })
-// );
+app.use(
+  cors({
+    origin: '*',            // 允许所有来源
+    allowMethods: ['*'],   // 允许所有 HTTP 方法
+    allowHeaders: ['*'],    // 允许所有请求头
+    exposeHeaders: ['*'],  // 暴露所有响应头
+  })
+);
 
 app.get('/hello', (c) => {
   return c.json({
@@ -23,13 +22,13 @@ app.get('/hello', (c) => {
   })
 });
 
-app.post('/get-github-access-token', (c) => {
+app.post('/get-github-access-token1', (c) => {
   return c.json({
     message: 'Hello test post!!!!!',
   });
 });
 
-app.post('/get-github-access-token1', async (c) => {
+app.post('/get-github-access-token', async (c) => {
    try {
     // 1. 获取原始请求数据
     const originalBody = await c.req.json();
