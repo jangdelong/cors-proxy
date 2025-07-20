@@ -3,27 +3,31 @@ import { cors } from 'hono/cors'
 import { handle } from 'hono/vercel'
 import { HTTPException } from 'hono/http-exception';
 
-export const runtime = 'edge'
+export const runtime = 'edge';
 
-const app = new Hono().basePath('/api')
+const app = new Hono().basePath('/api');
 
 app.use(
   '/api/*',
   cors({
-    origin: ['https://jelon.xyz', 'https://www.jelon.xyz'],
+    origin: (origin) => {
+      return origin.endsWith('jelon.xyz')
+        ? origin
+        : 'https://jelon.xyz';
+    },
     allowHeaders: ['X-Custom-Header', 'Upgrade-Insecure-Requests'],
     allowMethods: ['POST', 'GET', 'OPTIONS'],
     exposeHeaders: ['Content-Length', 'X-Kuma-Revision'],
     maxAge: 600,
-    credentials: true
+    credentials: true,
   })
 )
 
 app.get('/hello', (c) => {
   return c.json({
-    message: 'Hello from Hono!'
+    message: 'Hello from Hono!',
   })
-})
+});
 
 app.post('/get-github-access-token', async (c) => {
    try {
@@ -71,9 +75,9 @@ app.post('/get-github-access-token', async (c) => {
       message: 'Internal server error'
     }, 500);
   }
-})
+});
 
 
-export const GET = handle(app)
+export const GET = handle(app);
 
 export const POST = handle(app);
