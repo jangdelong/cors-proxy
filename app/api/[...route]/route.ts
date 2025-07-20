@@ -5,24 +5,19 @@ import { HTTPException } from 'hono/http-exception';
 
 export const runtime = 'edge';
 
-const app = new Hono().basePath('/api');
+const app = new Hono();
 
 app.use(
   '*',
   cors({
-    // origin: (origin) => {
-    //   return origin.endsWith('jelon.xyz')
-    //     ? origin
-    //     : 'https://jelon.xyz';
-    // },
-    origin: '*',
-    allowHeaders: ['*'], // ['X-Custom-Header', 'Upgrade-Insecure-Requests'],
-    allowMethods: ['POST', 'GET', 'OPTIONS'],
-    exposeHeaders: ['Content-Length', 'X-Kuma-Revision'],
-    maxAge: 600,
-    credentials: true,
+    origin: '*',            // 允许所有来源
+    allowMethods: ['*'],   // 允许所有 HTTP 方法
+    allowHeaders: ['*'],    // 允许所有请求头
+    exposeHeaders: ['*'],  // 暴露所有响应头
   })
-)
+);
+
+app.basePath('/api');
 
 app.get('/hello', (c) => {
   return c.json({
