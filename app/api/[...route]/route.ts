@@ -81,5 +81,3 @@ app.post('/api/get-github-access-token', async (c) => {
 export const GET = handle(app);
 
 export const POST = handle(app);
-
-export default handle(app);
