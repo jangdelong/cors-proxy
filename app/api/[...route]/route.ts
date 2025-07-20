@@ -10,11 +10,12 @@ const app = new Hono().basePath('/api');
 app.use(
   '*',
   cors({
-    origin: (origin) => {
-      return origin.endsWith('jelon.xyz')
-        ? origin
-        : 'https://jelon.xyz';
-    },
+    // origin: (origin) => {
+    //   return origin.endsWith('jelon.xyz')
+    //     ? origin
+    //     : 'https://jelon.xyz';
+    // },
+    origin: '*',
     allowHeaders: ['*'], // ['X-Custom-Header', 'Upgrade-Insecure-Requests'],
     allowMethods: ['POST', 'GET', 'OPTIONS'],
     exposeHeaders: ['Content-Length', 'X-Kuma-Revision'],
